@@ -6,8 +6,17 @@
 
 import requests
 import os
+from tqdm import tqdm
 
-parent_dir = input("Working Directory? ")
+#parent_dir = input("Working Directory? ")
+parent_dir = os.getcwd()
+print(parent_dir)
+
+os.mkdir(os.path.join(parent_dir, "imgs"))
+
+parent_dir = os.path.join(parent_dir, "imgs")
+print(parent_dir)
+
 path1 = os.path.join(parent_dir, "500hPa")
 path2 = os.path.join(parent_dir, "700hPa")
 path3 = os.path.join(parent_dir, "850hPa")
@@ -123,40 +132,39 @@ folderNL = parent_dir + '/NL/'
 folderWRF = parent_dir + '/12km-WRF/'
 folderRR = parent_dir + '/3hrly-RR/'
 
-
-        
-for url in image_url500:
-    print(url)
+#333
+for url in tqdm(image_url500):
+    #print(url)
     img_data = requests.get(url).content
     with open(folder500 + url.lstrip("https://pubfiles.pagasa.dost.gov.ph/tamss/nwp/gsm/500winds/"), 'wb') as handler:
         handler.write(img_data)
         
-for url in image_url700:
-    print(url)
+for url in tqdm(image_url700):
+    #print(url)
     img_data = requests.get(url).content
     with open(folder700 + url.lstrip("https://pubfiles.pagasa.dost.gov.ph/tamss/nwp/gsm/700winds/"), 'wb') as handler:
         handler.write(img_data)
         
-for url in image_url850:
-    print(url)
+for url in tqdm(image_url850):
+    #print(url)
     img_data = requests.get(url).content
     with open(folder850 + url.lstrip("https://pubfiles.pagasa.dost.gov.ph/tamss/nwp/gsm/850winds/"), 'wb') as handler:
         handler.write(img_data)
         
-for url in image_urlSW:
-    print(url)
+for url in tqdm(image_urlSW):
+    #print(url)
     img_data = requests.get(url).content
     with open(folderSW + url.lstrip("https://pubfiles.pagasa.dost.gov.ph/tamss/nwp/gsm/winds/"), 'wb') as handler:
         handler.write(img_data)
         
-for url in image_urlMSLP:
-    print(url)
+for url in tqdm(image_urlMSLP):
+    #print(url)
     img_data = requests.get(url).content
     with open(folderMSLP + url.lstrip("https://pubfiles.pagasa.dost.gov.ph/tamss/nwp/gsm/pressure/"), 'wb') as handler:
         handler.write(img_data)
 
-for url in image_urlRR:
-    print(url)
+for url in tqdm(image_urlRR):
+    #print(url)
     img_data = requests.get(url).content
     with open(folderRR + url.lstrip("https://pubfiles.pagasa.dost.gov.ph/tamss/nwp/gsm/24hr/"), 'wb') as handler:
         handler.write(img_data)
@@ -164,8 +172,8 @@ for url in image_urlRR:
 pointer = 100  
 prefix1 = 'pcp_1hr_d01_f00'
 prefix2 = 'pcp_1hr_d01_f0'
-for url in image_urlNL:
-    print(url)
+for url in tqdm(image_urlNL):
+    #print(url)
     img_data = requests.get(url).content
     if pointer < 1000: 
         with open(folderNL + prefix1 + str(pointer) + '.png', 'wb') as handler:
@@ -179,8 +187,8 @@ pointer = 100
 prefix3 = 'nl_pcp_cc_1hr_d02_f00'
 prefix4 = 'nl_pcp_cc_1hr_d02_f0'
 prefix5 = 'nl_pcp_cc_1hr_d02_f'
-for url in image_urlWRF:
-    print(url)
+for url in tqdm(image_urlWRF):
+    #print(url)
     img_data = requests.get(url).content
     if pointer < 1000: 
         with open(folderWRF + prefix3 + str(pointer) + '.png', 'wb') as handler:
@@ -193,12 +201,11 @@ for url in image_urlWRF:
             handler.write(img_data)        
     pointer += 100
         
-print("done")   
+print("DONE")
         
 
 
 # In[ ]:
-
 
 
 
