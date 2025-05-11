@@ -7,14 +7,21 @@
 import requests
 import os
 from tqdm import tqdm
+import shutil
+from datetime import datetime
 
+now = datetime.now()
+now_str = now.strftime("%Y-%m-%d_%H:%M:00")
 #parent_dir = input("Working Directory? ")
 parent_dir = os.getcwd()
 print(parent_dir)
 
-os.mkdir(os.path.join(parent_dir, "imgs"))
+if os.path.exists(now_str):
+    shutil.rmtree(now_str)
 
-parent_dir = os.path.join(parent_dir, "imgs")
+os.mkdir(os.path.join(parent_dir, now_str))
+
+parent_dir = os.path.join(parent_dir, now_str)
 print(parent_dir)
 
 path1 = os.path.join(parent_dir, "500hPa")
